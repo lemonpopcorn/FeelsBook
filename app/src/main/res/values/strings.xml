@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">FeelsBook</string>
+    <string name="app_name">yuqiao-FeelsBook</string>
+    <string name="anger">ANGER</string>
+    <string name="love">LOVE</string>
+    <string name="joy">JOY</string>
+    <string name="surprise">SURPRISE</string>
+    <string name="feeling_hint">Describe your feeling!</string>
+    <string name="sadness">SADNESS</string>
+    <string name="fear">FEAR</string>
+    <string name="history">History</string>
+    <string name="delete">Delete</string>
 </resources>
