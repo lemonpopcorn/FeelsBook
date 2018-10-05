@@ -13,12 +13,30 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/*
+
+    Purpose: allows data sharing between without constantly saving
+    to disk
+
+    Rationale: putExtra using intents allow copies of records and stats
+    to be passed around but not their reference.  This means that one
+    class has to be responsible of updating those variables.  A singleton
+    class allows these variables to be modified and read throughout each
+    activity.
+
+
+ */
+
 public class Singleton {
 
+    // initialize the only instance of singleton
     private static final Singleton instance = new Singleton();
+
+    // objects to be shared
     private ArrayList<Record> records = new ArrayList<>();
     private EmotionStats stats = new EmotionStats();
 
+    // load history from files
     public void loadData(){
         try {
 
@@ -27,9 +45,7 @@ public class Singleton {
             Gson gson = new Gson();
 
             // Initialize records
-            Log.d("lemon", "doing good!");
             FileInputStream fis = new FileInputStream("/data/user/0/com.example.feelsbook/files/records.json");
-            Log.d("lemon", "eveb better!");
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             records = gson.fromJson(in, new TypeToken<ArrayList<Record>>(){}.getType());
 
@@ -39,18 +55,16 @@ public class Singleton {
             stats = gson.fromJson(in, new TypeToken<EmotionStats>(){}.getType());
 
         } catch (FileNotFoundException e){
-            Log.d("Lemon Yes!?", "No previous data found.");
             e.printStackTrace();
         }
     }
 
+    // At construction, read from the files
     private Singleton(){
-//        File file = new File("/data/user/0/com.example.feelsbook/files/records.json");
-        File file = new File("files/records.json");
-        Log.d("Lemon file exists", new Boolean(file.exists()).toString());
-
         loadData();
     }
+
+    // public getters
 
     public static Singleton getInstance() {
         return instance;

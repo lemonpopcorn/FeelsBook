@@ -23,14 +23,29 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+
+    Purpose: the main interface that the user sees after launching the
+    app.  Shows the user the statistics of each emotion and allow user
+    to quickly add emotions.
+
+    Rationale: A simple user interface that doesn't do too much to
+    overwhelm the user.  Allows the user to add emotions using a single
+    click and optinally add comment.  Additonally, allow user to see
+    a brief overview of how many of each emotion is recorded.
+
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Record> records = Singleton.getInstance().getRecords();
     EmotionStats stats = Singleton.getInstance().getStats();
 
+    // Filenames of the stored json files
     static final String RECORDS_KEY = "records.json";
     static final String STATS_KEY = "stats.json";
 
+    // Emotion texts
     static final String LOVE_TEXT = "LOVE";
     static final String JOY_TEXT = "JOY";
     static final String SURPRISE_TEXT = "SURPRISE";
@@ -43,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         String comment = comment_box.getText().toString();
         comment_box.setText("");
         records.add(new Record(emotion, timestamp, comment));
-        Log.d("lemon", records.get(records.size() - 1).toString());
     }
 
     // Called when the user press the HISTORY button
@@ -56,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.d("lemon file loading at", this.getApplicationInfo().dataDir);
-        File directory = new File(this.getApplicationInfo().dataDir);
-        File[] files = directory.listFiles();
-        for (File file : files){
-            Log.d("Lemon Files:", file.getName());
-        }
 
         final EditText comment_box = findViewById(R.id.comment_box);
 
@@ -180,13 +187,10 @@ public class MainActivity extends AppCompatActivity {
             out.flush();
 
         } catch (Exception e) {
-            Log.d("lemon", "This should not happen!!!!");
             e.printStackTrace();
         }
 
         super.onStop();
-        Log.d("lemon", "DESTOROYARU");
-        Log.d("lemon file saved at", this.getApplicationInfo().dataDir);
     }
 
 }

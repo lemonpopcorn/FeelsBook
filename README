@@ -1,1 +1,15 @@
+Current Issues:
+
+1. Missing UML diagram
+2. Missing modifying past emotion feature.  Can only delete.
+
+Video demo: https://youtu.be/6SfTFHo1h1g
+
+Sources:
+
+Shaiful Chowdhury: CMPUT 301 Lab code for saving and reading objects using Gson
+
 Joachim Sauer (40342), L S (543738): https://stackoverflow.com/questions/3914404/how-to-get-current-moment-in-iso-8601-format-with-date-hour-and-minute
+
+
+

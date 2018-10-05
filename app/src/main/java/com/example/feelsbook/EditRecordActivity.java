@@ -9,6 +9,18 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+/*
+    Purpose: Activity class used to let user modify a past emotion
+
+    Design Rationale: Rather than putting everything under MainActivity,
+    the edit page is extracted out to preserve the separation of concern.
+
+    Outstanding issues: So far, only the deletion of a past emotion is
+    implemented.  That is, although you can delete a past emotion, you
+    cannot edit it once it's been created.  However, this activity was
+    planned to include the edit functionality as well initially, this
+    results in a quite ugly layout with a single delete button.
+*/
 public class EditRecordActivity extends AppCompatActivity {
 
     ArrayList<Record> records = Singleton.getInstance().getRecords();
@@ -20,15 +32,14 @@ public class EditRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_record);
         Intent intent = getIntent();
         final Integer position = (Integer) intent.getSerializableExtra(DisplayHistoryActivity.EXTRA_MESSAGE);
-        Log.d("lemon EditRecord", position.toString());
 
+        // Button concerned with the deletion of emotions
         Button deleteButton = findViewById(R.id.delete_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Record record = records.remove((int)position);
-                Log.d("lemon yeaaaa", record.getEmotion().toString());
-                // decrement the count depending on which emotion is removed
+                // Decrement the count for the deleted emotion
                 switch (record.getEmotion().toString()){
                     case MainActivity.LOVE_TEXT:
                         stats.decrementLove();
@@ -43,13 +54,13 @@ public class EditRecordActivity extends AppCompatActivity {
                         stats.decrementJoy();
                         break;
                     case MainActivity.SURPRISE_TEXT:
-                        Log.d("lemon", "what?");
                         stats.decrementSurprise();
                         break;
                     case MainActivity.SADNESS_TEXT:
                         stats.decrementSadness();
                         break;
                 }
+                // Return back to the history activity
                 finish();
             }
         });

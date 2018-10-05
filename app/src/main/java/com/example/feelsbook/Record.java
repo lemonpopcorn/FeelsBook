@@ -8,6 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/*
+
+    Purpose: Represent a single emotion entry
+
+    Rationale: A single entry should be an entity that
+    combines the emotion, the text description, and a
+    date that the user enters.
+
+ */
+
 public class Record implements Serializable {
 
     private Emotion emotion;

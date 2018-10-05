@@ -12,6 +12,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/*
+    Purpose: An activity used to display the history of past activities
+
+    Design Rationale: The main activity is crowded in the sense that
+    there are already quite a few number of emotion buttons.  In addition,
+    the main activity already shows the number of each emotion, so I believfe
+    it's better to separate the history into another activity
+
+ */
+
 public class DisplayHistoryActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.feelsbook.POSITION";
@@ -27,10 +37,11 @@ public class DisplayHistoryActivity extends AppCompatActivity {
         recordList.setAdapter(recordAdapter);
         setContentView(recordList);
 
+        // Listens to click on the history items and launch the EditActivity
+        // to edit the clicked item
         recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("lemon", new Integer(position).toString() + " " + new Long(id).toString());
                 Intent intent = new Intent(DisplayHistoryActivity.this, EditRecordActivity.class);
                 intent.putExtra(EXTRA_MESSAGE, new Integer(position));
                 startActivity(intent);
@@ -46,8 +57,8 @@ public class DisplayHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onResume(){
+        // Update the history on resume
         super.onResume();
         recordAdapter.notifyDataSetChanged();
-        Log.d("lemon Delete2", new Integer(records.size()).toString());
     }
 }

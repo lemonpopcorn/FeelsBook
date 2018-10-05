@@ -1,5 +1,15 @@
 package com.example.feelsbook;
 
+/*
+
+    Purpose: hold the number counts of each emotion
+
+    Rationale: To have a single class that manages the
+    statistics part of the app allows convenient data store
+    using Gson.
+
+ */
+
 public class EmotionStats {
 
     private Integer loveCount = 0;
